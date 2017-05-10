@@ -13,6 +13,7 @@ from kafka.errors import KafkaError
 
 
 def read_credentials():
+    print("Reading credentials...")
     file_name = "credentials.json"
     try:
         with open(file_name) as data_file:
@@ -26,8 +27,10 @@ def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
 
     oauth = OAuth(access_token, access_secret, consumer_key, consumer_secret)
     
+    print("Creating producer...")
     producer = KafkaProducer(bootstrap_servers='localhost:9092')
 
+    print("Connecting to twitter...")
     # Initiate the connection to Twitter Streaming API
     twitter_stream = TwitterStream(auth=oauth)
 
@@ -39,6 +42,7 @@ def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
     # You don't have to set it to stop, but can continue running
     # the Twitter API to collect data for days or even longer.
     tweet_count = 10
+    print("Stating to read tweets")
     for tweet in iterator:
         tweet_count -= 1
         # Twitter Python Tool wraps the data returned by Twitter
@@ -60,7 +64,6 @@ def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
             break
 
 if __name__ == "__main__":
-    print("Stating to read tweets")
     credentials = read_credentials()
     read_tweets(credentials['ACCESS_TOKEN'], credentials['ACCESS_SECRET'],
                 credentials['CONSUMER_KEY'], credentials['CONSUMER_SECRET'])
