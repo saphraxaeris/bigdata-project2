@@ -26,7 +26,7 @@ def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
 
     oauth = OAuth(access_token, access_secret, consumer_key, consumer_secret)
     
-    producer = KafkaProducer(bootstrap_servers=['localhost:9094'])
+    producer = KafkaProducer(bootstrap_servers='localhost:9094')
 
     # Initiate the connection to Twitter Streaming API
     twitter_stream = TwitterStream(auth=oauth)
