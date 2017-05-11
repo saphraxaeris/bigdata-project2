@@ -42,16 +42,8 @@ def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
         # as a TwitterDictResponse object.
         try:
             tweetFile=open("tweets.txt", "a+")
-            tweetFile.write("%s\n" % str(tweet)
+            tweetFile.write("%s\n" % str(tweet))
             tweetFile.close()
-            # producer.send('tweets', str(tweet))
-
-            # print screen_name and name
-            # print("TWEET: ", tweet['user']['screen_name'])
-            # The command below will do pretty printing for JSON data, try it out
-            # print("TWEET JSON: ", json.dumps(tweet, indent=4))
-            # This next command, prints the tweet as a string
-            # print ("TWEETS STRING", str(tweet))
         except:
             pass
 
