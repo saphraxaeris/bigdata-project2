@@ -7,10 +7,6 @@ except ImportError:
 # Import the necessary methods from "twitter" library
 from twitter import Twitter, OAuth, TwitterHTTPError, TwitterStream
 
-# Import kafka packages
-from kafka import KafkaProducer
-from kafka.errors import KafkaError
-
 
 def read_credentials():
     print("Reading credentials...")
@@ -26,9 +22,6 @@ def read_credentials():
 def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
 
     oauth = OAuth(access_token, access_secret, consumer_key, consumer_secret)
-    
-    print("Creating producer...")
-    producer = KafkaProducer(bootstrap_servers='localhost:9092')
 
     print("Connecting to twitter...")
     # Initiate the connection to Twitter Streaming API
@@ -41,12 +34,17 @@ def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
     # Here we set it to stop after getting 1000 tweets.
     # You don't have to set it to stop, but can continue running
     # the Twitter API to collect data for days or even longer.
+    # tweet_count = 10
     print("Stating to read tweets")
     for tweet in iterator:
+        # tweet_count -= 1
         # Twitter Python Tool wraps the data returned by Twitter
         # as a TwitterDictResponse object.
         try:
-            producer.send('tweets', str(tweet))
+            tweetFile=open("tweets.txt", "a+")
+            tweetFile.write("%s\n" % str(tweet)
+            tweetFile.close()
+            # producer.send('tweets', str(tweet))
 
             # print screen_name and name
             # print("TWEET: ", tweet['user']['screen_name'])
@@ -56,6 +54,7 @@ def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
             # print ("TWEETS STRING", str(tweet))
         except:
             pass
+
 
 if __name__ == "__main__":
     credentials = read_credentials()

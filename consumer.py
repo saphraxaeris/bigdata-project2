@@ -10,7 +10,7 @@ from pyspark.streaming import StreamingContext
 
 def get_tweets():
     # Create a local StreamingContext with two working thread and batch interval of 10 minutes
-    sc = SparkContext("local[2]", "NetworkTweetGet")
+    sc = SparkContext(appName="NetworkTweetGet")
     ssc = StreamingContext(sc, 600)
 
     # Create a DStream that will connect to hostname:port, like localhost:9092
