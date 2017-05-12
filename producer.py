@@ -56,6 +56,8 @@ def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
             # print ("TWEETS STRING", str(tweet))
         except:
             pass
+    
+    print("Disconnected from API...")
 
 if __name__ == "__main__":
     credentials = read_credentials()
