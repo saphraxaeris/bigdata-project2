@@ -1,0 +1,569 @@
+{
+    "delete": {
+        "status": {
+            "user_id_str": "2984818157", 
+            "user_id": 2984818157, 
+            "id": 864233105393168384, 
+            "id_str": "864233105393168384"
+        }, 
+        "timestamp_ms": "1494885219756"
+    }
+}
+{
+    "delete": {
+        "status": {
+            "user_id_str": "2429747641", 
+            "user_id": 2429747641, 
+            "id": 860725069223387137, 
+            "id_str": "860725069223387137"
+        }, 
+        "timestamp_ms": "1494885244560"
+    }
+}
+{
+    "favorited": false, 
+    "contributors": null, 
+    "truncated": false, 
+    "text": "RT @followtrickhp: Potterheads \nRetweet para ganhar seguidores, siga quem retweetou e siga de volta quem te seguiu", 
+    "is_quote_status": false, 
+    "in_reply_to_status_id": null, 
+    "user": {
+        "follow_request_sent": null, 
+        "profile_use_background_image": false, 
+        "default_profile_image": false, 
+        "id": 809545205212909568, 
+        "verified": false, 
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/864172243227734016/m4OgrrP6_normal.jpg", 
+        "profile_sidebar_fill_color": "000000", 
+        "profile_text_color": "000000", 
+        "followers_count": 2728, 
+        "profile_sidebar_border_color": "000000", 
+        "id_str": "809545205212909568", 
+        "profile_background_color": "000000", 
+        "listed_count": 1, 
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png", 
+        "utc_offset": null, 
+        "statuses_count": 25, 
+        "description": "ERA Istrefi and HR FAN ::::I love you Era Istrefi  @strefie New single \"REDRUM\" http://smarturl.it/Redrum", 
+        "friends_count": 45, 
+        "location": null, 
+        "profile_link_color": "0084B4", 
+        "profile_image_url": "http://pbs.twimg.com/profile_images/864172243227734016/m4OgrrP6_normal.jpg", 
+        "following": null, 
+        "geo_enabled": true, 
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/809545205212909568/1494779506", 
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png", 
+        "name": "ERA Istrefi\" HR fan", 
+        "lang": "tr", 
+        "profile_background_tile": false, 
+        "favourites_count": 45, 
+        "screen_name": "ERAstrefiHR_", 
+        "notifications": null, 
+        "url": null, 
+        "created_at": "Thu Dec 15 23:46:32 +0000 2016", 
+        "contributors_enabled": false, 
+        "time_zone": null, 
+        "protected": false, 
+        "default_profile": false, 
+        "is_translator": false
+    }, 
+    "filter_level": "low", 
+    "geo": null, 
+    "id": 864237480060628996, 
+    "favorite_count": 0, 
+    "lang": "pt", 
+    "retweeted_status": {
+        "contributors": null, 
+        "truncated": false, 
+        "text": "Potterheads \nRetweet para ganhar seguidores, siga quem retweetou e siga de volta quem te seguiu", 
+        "is_quote_status": false, 
+        "in_reply_to_status_id": null, 
+        "id": 864237207325990913, 
+        "favorite_count": 11, 
+        "source": "<a href=\"https://statusbrew.com\" rel=\"nofollow\">Statusbrew</a>", 
+        "retweeted": false, 
+        "coordinates": null, 
+        "entities": {
+            "user_mentions": [], 
+            "symbols": [], 
+            "hashtags": [], 
+            "urls": []
+        }, 
+        "in_reply_to_screen_name": null, 
+        "id_str": "864237207325990913", 
+        "retweet_count": 33, 
+        "in_reply_to_user_id": null, 
+        "favorited": false, 
+        "user": {
+            "follow_request_sent": null, 
+            "profile_use_background_image": false, 
+            "default_profile_image": false, 
+            "id": 3439473365, 
+            "verified": false, 
+            "profile_image_url_https": "https://pbs.twimg.com/profile_images/851280214332014596/pCqzv8E6_normal.jpg", 
+            "profile_sidebar_fill_color": "000000", 
+            "profile_text_color": "000000", 
+            "followers_count": 76074, 
+            "profile_sidebar_border_color": "000000", 
+            "id_str": "3439473365", 
+            "profile_background_color": "000000", 
+            "listed_count": 896, 
+            "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png", 
+            "utc_offset": null, 
+            "statuses_count": 17110, 
+            "description": "Olha isso mais um projeto de follow trick.", 
+            "friends_count": 12968, 
+            "location": "hogwarts", 
+            "profile_link_color": "000000", 
+            "profile_image_url": "http://pbs.twimg.com/profile_images/851280214332014596/pCqzv8E6_normal.jpg", 
+            "following": null, 
+            "geo_enabled": false, 
+            "profile_banner_url": "https://pbs.twimg.com/profile_banners/3439473365/1491773384", 
+            "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png", 
+            "name": "Follow Trick", 
+            "lang": "pt", 
+            "profile_background_tile": false, 
+            "favourites_count": 7505, 
+            "screen_name": "followtrickhp", 
+            "notifications": null, 
+            "url": "https://twitter.com/rbdesignr", 
+            "created_at": "Tue Aug 25 18:09:51 +0000 2015", 
+            "contributors_enabled": false, 
+            "time_zone": null, 
+            "protected": false, 
+            "default_profile": false, 
+            "is_translator": false
+        }, 
+        "geo": null, 
+        "in_reply_to_user_id_str": null, 
+        "lang": "pt", 
+        "created_at": "Mon May 15 21:53:01 +0000 2017", 
+        "filter_level": "low", 
+        "in_reply_to_status_id_str": null, 
+        "place": null
+    }, 
+    "entities": {
+        "user_mentions": [
+            {
+                "id": 3439473365, 
+                "indices": [
+                    3, 
+                    17
+                ], 
+                "id_str": "3439473365", 
+                "screen_name": "followtrickhp", 
+                "name": "Follow Trick"
+            }
+        ], 
+        "symbols": [], 
+        "hashtags": [], 
+        "urls": []
+    }, 
+    "in_reply_to_user_id_str": null, 
+    "retweeted": false, 
+    "coordinates": null, 
+    "timestamp_ms": "1494885246659", 
+    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>", 
+    "in_reply_to_status_id_str": null, 
+    "in_reply_to_screen_name": null, 
+    "id_str": "864237480060628996", 
+    "place": null, 
+    "retweet_count": 0, 
+    "created_at": "Mon May 15 21:54:06 +0000 2017", 
+    "in_reply_to_user_id": null
+}
+{
+    "favorited": false, 
+    "contributors": null, 
+    "truncated": true, 
+    "text": "#ebay Gucci Guilty Perfume for Women Eau De Toilette EDT 2.5 oz Brand New In Box: $34.00 (15 Bids) End\u2026\u2026 https://t.co/H4IOkAVFQz", 
+    "possibly_sensitive": false, 
+    "is_quote_status": false, 
+    "in_reply_to_status_id": null, 
+    "user": {
+        "follow_request_sent": null, 
+        "profile_use_background_image": true, 
+        "default_profile_image": false, 
+        "id": 746821247451926528, 
+        "verified": false, 
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/746821596296396800/GMaKDZ-6_normal.jpg", 
+        "profile_sidebar_fill_color": "DDEEF6", 
+        "profile_text_color": "333333", 
+        "followers_count": 361, 
+        "profile_sidebar_border_color": "C0DEED", 
+        "id_str": "746821247451926528", 
+        "profile_background_color": "F5F8FA", 
+        "listed_count": 159, 
+        "profile_background_image_url_https": "", 
+        "utc_offset": -25200, 
+        "statuses_count": 79500, 
+        "description": "The life is Deal One , E #marketing", 
+        "friends_count": 223, 
+        "location": "United Kingdom", 
+        "profile_link_color": "1DA1F2", 
+        "profile_image_url": "http://pbs.twimg.com/profile_images/746821596296396800/GMaKDZ-6_normal.jpg", 
+        "following": null, 
+        "geo_enabled": false, 
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/746821247451926528/1466891208", 
+        "profile_background_image_url": "", 
+        "name": "Deal One", 
+        "lang": "en", 
+        "profile_background_tile": false, 
+        "favourites_count": 16, 
+        "screen_name": "1DealOne", 
+        "notifications": null, 
+        "url": null, 
+        "created_at": "Sat Jun 25 21:43:55 +0000 2016", 
+        "contributors_enabled": false, 
+        "time_zone": "Pacific Time (US & Canada)", 
+        "protected": false, 
+        "default_profile": true, 
+        "is_translator": false
+    }, 
+    "filter_level": "low", 
+    "geo": null, 
+    "id": 864241284323528706, 
+    "favorite_count": 0, 
+    "lang": "en", 
+    "extended_tweet": {
+        "display_text_range": [
+            0, 
+            136
+        ], 
+        "entities": {
+            "user_mentions": [], 
+            "symbols": [], 
+            "hashtags": [
+                {
+                    "indices": [
+                        0, 
+                        5
+                    ], 
+                    "text": "ebay"
+                }, 
+                {
+                    "indices": [
+                        128, 
+                        136
+                    ], 
+                    "text": "1USNews"
+                }
+            ], 
+            "urls": [
+                {
+                    "url": "https://t.co/YCTRfde1Xe", 
+                    "indices": [
+                        104, 
+                        127
+                    ], 
+                    "expanded_url": "http://dlvr.it/P8dHv7", 
+                    "display_url": "dlvr.it/P8dHv7"
+                }
+            ], 
+            "media": [
+                {
+                    "expanded_url": "https://twitter.com/1DealOne/status/864241284323528706/photo/1", 
+                    "display_url": "pic.twitter.com/nuqk7Ila0P", 
+                    "url": "https://t.co/nuqk7Ila0P", 
+                    "media_url_https": "https://pbs.twimg.com/media/C_5m3cjUwAAdI76.jpg", 
+                    "id_str": "864241281244905472", 
+                    "sizes": {
+                        "small": {
+                            "h": 680, 
+                            "resize": "fit", 
+                            "w": 680
+                        }, 
+                        "large": {
+                            "h": 700, 
+                            "resize": "fit", 
+                            "w": 700
+                        }, 
+                        "medium": {
+                            "h": 700, 
+                            "resize": "fit", 
+                            "w": 700
+                        }, 
+                        "thumb": {
+                            "h": 150, 
+                            "resize": "crop", 
+                            "w": 150
+                        }
+                    }, 
+                    "indices": [
+                        137, 
+                        160
+                    ], 
+                    "type": "photo", 
+                    "id": 864241281244905472, 
+                    "media_url": "http://pbs.twimg.com/media/C_5m3cjUwAAdI76.jpg"
+                }
+            ]
+        }, 
+        "extended_entities": {
+            "media": [
+                {
+                    "expanded_url": "https://twitter.com/1DealOne/status/864241284323528706/photo/1", 
+                    "display_url": "pic.twitter.com/nuqk7Ila0P", 
+                    "url": "https://t.co/nuqk7Ila0P", 
+                    "media_url_https": "https://pbs.twimg.com/media/C_5m3cjUwAAdI76.jpg", 
+                    "id_str": "864241281244905472", 
+                    "sizes": {
+                        "small": {
+                            "h": 680, 
+                            "resize": "fit", 
+                            "w": 680
+                        }, 
+                        "large": {
+                            "h": 700, 
+                            "resize": "fit", 
+                            "w": 700
+                        }, 
+                        "medium": {
+                            "h": 700, 
+                            "resize": "fit", 
+                            "w": 700
+                        }, 
+                        "thumb": {
+                            "h": 150, 
+                            "resize": "crop", 
+                            "w": 150
+                        }
+                    }, 
+                    "indices": [
+                        137, 
+                        160
+                    ], 
+                    "type": "photo", 
+                    "id": 864241281244905472, 
+                    "media_url": "http://pbs.twimg.com/media/C_5m3cjUwAAdI76.jpg"
+                }
+            ]
+        }, 
+        "full_text": "#ebay Gucci Guilty Perfume for Women Eau De Toilette EDT 2.5 oz Brand New In Box: $34.00 (15 Bids) End\u2026 https://t.co/YCTRfde1Xe #1USNews https://t.co/nuqk7Ila0P"
+    }, 
+    "entities": {
+        "user_mentions": [], 
+        "symbols": [], 
+        "hashtags": [
+            {
+                "indices": [
+                    0, 
+                    5
+                ], 
+                "text": "ebay"
+            }
+        ], 
+        "urls": [
+            {
+                "url": "https://t.co/H4IOkAVFQz", 
+                "indices": [
+                    105, 
+                    128
+                ], 
+                "expanded_url": "https://twitter.com/i/web/status/864241284323528706", 
+                "display_url": "twitter.com/i/web/status/8\u2026"
+            }
+        ]
+    }, 
+    "in_reply_to_user_id_str": null, 
+    "retweeted": false, 
+    "coordinates": null, 
+    "timestamp_ms": "1494886153666", 
+    "source": "<a href=\"https://dlvrit.com/\" rel=\"nofollow\">dlvr.it</a>", 
+    "in_reply_to_status_id_str": null, 
+    "in_reply_to_screen_name": null, 
+    "id_str": "864241284323528706", 
+    "display_text_range": [
+        0, 
+        140
+    ], 
+    "place": null, 
+    "retweet_count": 0, 
+    "created_at": "Mon May 15 22:09:13 +0000 2017", 
+    "in_reply_to_user_id": null
+}
+{
+    "favorited": false, 
+    "contributors": null, 
+    "truncated": false, 
+    "text": "RT @iHeartRadio: Rise up, Camila, rise, this is the beginning. https://t.co/pYCnN2tVkV", 
+    "possibly_sensitive": false, 
+    "is_quote_status": false, 
+    "in_reply_to_status_id": null, 
+    "user": {
+        "follow_request_sent": null, 
+        "profile_use_background_image": false, 
+        "default_profile_image": false, 
+        "id": 2760949013, 
+        "verified": false, 
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/752980460851097601/MIZeyn3G_normal.jpg", 
+        "profile_sidebar_fill_color": "DDEEF6", 
+        "profile_text_color": "333333", 
+        "followers_count": 688, 
+        "profile_sidebar_border_color": "C0DEED", 
+        "id_str": "2760949013", 
+        "profile_background_color": "FFFFFF", 
+        "listed_count": 6, 
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme18/bg.gif", 
+        "utc_offset": -25200, 
+        "statuses_count": 41342, 
+        "description": "the hurting. the healing. the loving.", 
+        "friends_count": 210, 
+        "location": "camilizer", 
+        "profile_link_color": "F58EA8", 
+        "profile_image_url": "http://pbs.twimg.com/profile_images/752980460851097601/MIZeyn3G_normal.jpg", 
+        "following": null, 
+        "geo_enabled": false, 
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/2760949013/1492458652", 
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme18/bg.gif", 
+        "name": "alice", 
+        "lang": "pt", 
+        "profile_background_tile": false, 
+        "favourites_count": 501, 
+        "screen_name": "ialicehs", 
+        "notifications": null, 
+        "url": null, 
+        "created_at": "Thu Sep 04 03:45:02 +0000 2014", 
+        "contributors_enabled": false, 
+        "time_zone": "Pacific Time (US & Canada)", 
+        "protected": false, 
+        "default_profile": false, 
+        "is_translator": false
+    }, 
+    "filter_level": "low", 
+    "geo": null, 
+    "id": 864241405950136325, 
+    "favorite_count": 0, 
+    "lang": "en", 
+    "retweeted_status": {
+        "contributors": null, 
+        "truncated": false, 
+        "text": "Rise up, Camila, rise, this is the beginning. https://t.co/pYCnN2tVkV", 
+        "is_quote_status": false, 
+        "in_reply_to_status_id": null, 
+        "id": 864238979922710529, 
+        "favorite_count": 319, 
+        "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>", 
+        "retweeted": false, 
+        "coordinates": null, 
+        "entities": {
+            "user_mentions": [], 
+            "symbols": [], 
+            "hashtags": [], 
+            "urls": [
+                {
+                    "url": "https://t.co/pYCnN2tVkV", 
+                    "indices": [
+                        46, 
+                        69
+                    ], 
+                    "expanded_url": "http://bit.ly/2pOB28x", 
+                    "display_url": "bit.ly/2pOB28x"
+                }
+            ]
+        }, 
+        "in_reply_to_screen_name": null, 
+        "id_str": "864238979922710529", 
+        "retweet_count": 202, 
+        "in_reply_to_user_id": null, 
+        "favorited": false, 
+        "user": {
+            "follow_request_sent": null, 
+            "profile_use_background_image": true, 
+            "default_profile_image": false, 
+            "id": 46116615, 
+            "verified": true, 
+            "profile_image_url_https": "https://pbs.twimg.com/profile_images/843084957048291329/BGduzVyX_normal.jpg", 
+            "profile_sidebar_fill_color": "2E2E2E", 
+            "profile_text_color": "787878", 
+            "followers_count": 1079751, 
+            "profile_sidebar_border_color": "000000", 
+            "id_str": "46116615", 
+            "profile_background_color": "000000", 
+            "listed_count": 4943, 
+            "profile_background_image_url_https": "https://pbs.twimg.com/profile_background_images/700811174888116224/IcXn9vcX.jpg", 
+            "utc_offset": -14400, 
+            "statuses_count": 80477, 
+            "description": "All your favorite music. All your favorite stations. All free.", 
+            "friends_count": 78110, 
+            "location": "United States", 
+            "profile_link_color": "000000", 
+            "profile_image_url": "http://pbs.twimg.com/profile_images/843084957048291329/BGduzVyX_normal.jpg", 
+            "following": null, 
+            "geo_enabled": true, 
+            "profile_banner_url": "https://pbs.twimg.com/profile_banners/46116615/1494853693", 
+            "profile_background_image_url": "http://pbs.twimg.com/profile_background_images/700811174888116224/IcXn9vcX.jpg", 
+            "name": "iHeartRadio", 
+            "lang": "en", 
+            "profile_background_tile": true, 
+            "favourites_count": 18937, 
+            "screen_name": "iHeartRadio", 
+            "notifications": null, 
+            "url": "http://iheartradio.com", 
+            "created_at": "Wed Jun 10 13:56:14 +0000 2009", 
+            "contributors_enabled": false, 
+            "time_zone": "Eastern Time (US & Canada)", 
+            "protected": false, 
+            "default_profile": false, 
+            "is_translator": false
+        }, 
+        "geo": null, 
+        "in_reply_to_user_id_str": null, 
+        "possibly_sensitive": false, 
+        "lang": "en", 
+        "created_at": "Mon May 15 22:00:04 +0000 2017", 
+        "filter_level": "low", 
+        "in_reply_to_status_id_str": null, 
+        "place": null
+    }, 
+    "entities": {
+        "user_mentions": [
+            {
+                "id": 46116615, 
+                "indices": [
+                    3, 
+                    15
+                ], 
+                "id_str": "46116615", 
+                "screen_name": "iHeartRadio", 
+                "name": "iHeartRadio"
+            }
+        ], 
+        "symbols": [], 
+        "hashtags": [], 
+        "urls": [
+            {
+                "url": "https://t.co/pYCnN2tVkV", 
+                "indices": [
+                    63, 
+                    86
+                ], 
+                "expanded_url": "http://bit.ly/2pOB28x", 
+                "display_url": "bit.ly/2pOB28x"
+            }
+        ]
+    }, 
+    "in_reply_to_user_id_str": null, 
+    "retweeted": false, 
+    "coordinates": null, 
+    "timestamp_ms": "1494886182664", 
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>", 
+    "in_reply_to_status_id_str": null, 
+    "in_reply_to_screen_name": null, 
+    "id_str": "864241405950136325", 
+    "place": null, 
+    "retweet_count": 0, 
+    "created_at": "Mon May 15 22:09:42 +0000 2017", 
+    "in_reply_to_user_id": null
+}
+{
+    "delete": {
+        "status": {
+            "user_id_str": "636744604", 
+            "user_id": 636744604, 
+            "id": 404837070029328384, 
+            "id_str": "404837070029328384"
+        }, 
+        "timestamp_ms": "1494886188406"
+    }
+}

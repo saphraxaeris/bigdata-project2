@@ -34,16 +34,20 @@ def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
     # Here we set it to stop after getting 1000 tweets.
     # You don't have to set it to stop, but can continue running
     # the Twitter API to collect data for days or even longer.
-    # tweet_count = 10
+    tweet_count = 1
     print("Stating to read tweets")
     for tweet in iterator:
-        # tweet_count -= 1
+        tweet_count -= 1
         # Twitter Python Tool wraps the data returned by Twitter
         # as a TwitterDictResponse object.
         try:
             tweetFile=open("tweets4.txt", "a+")
-            tweetFile.write("%s\n" % str(tweet))
+            tweetFile.write("%s\n" % json.dumps(tweet, indent=4))
             tweetFile.close()
+
+            if tweet_count <= 0:
+                break
+            
         except:
             pass
 
