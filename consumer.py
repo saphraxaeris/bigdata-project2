@@ -1,9 +1,5 @@
 #from pathlib import Path
 
-# Import kafka packages
-from kafka import KafkaConsumer
-from kafka.errors import KafkaError
-
 # Import Spark packages
 from pyspark import SparkContext
 from pyspark.sql import SparkSession
