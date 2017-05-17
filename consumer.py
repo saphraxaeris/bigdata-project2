@@ -72,7 +72,7 @@ if __name__ == "__main__":
     # Keywords
     keywordsCounted = wordsRdd.filter(VerifyNotStopWord).countByValueAndWindow(3600,600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     topKeywords = keywordsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
-    hack.foreach(PrepareKeyWords)
+    hack.foreach(PrepareKeywords)
     topKeywords.foreachRDD(lambda row: row.foreach(SendKeyword))
 
     # Hashtags   
@@ -90,7 +90,7 @@ if __name__ == "__main__":
 
     # Trump Words
     trumpWordsCounted = wordsRdd.filter(VerifyTrumpWord).countByValueAndWindow(86400,3600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
-    hack.foreach(PrepareScreenNames)
+    hack.foreach(PrepareTrumpWords)
     trumpWordsCounted.foreachRDD(lambda row: row.foreach(SendTrumpWord))
 
     ssc.start()             # Start the computation
