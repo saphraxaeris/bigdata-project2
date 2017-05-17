@@ -28,7 +28,7 @@ def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
     oauth = OAuth(access_token, access_secret, consumer_key, consumer_secret)
     
     print("Creating producer...")
-    producer = KafkaProducer(bootstrap_servers='localhost:9092')
+    producer = KafkaProducer(bootstrap_servers='localhost:9092',value_serializer=lambda m: json.dumps(m).encode('ascii'))
 
     print("Connecting to twitter...")
     # Initiate the connection to Twitter Streaming API
@@ -46,7 +46,7 @@ def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
         # Twitter Python Tool wraps the data returned by Twitter
         # as a TwitterDictResponse object.
         try:
-            producer.send('tweets', str(tweet))
+            producer.send('tweets', tweet)
 
             # print screen_name and name
             # print("TWEET: ", tweet['user']['screen_name'])

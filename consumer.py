@@ -1,4 +1,4 @@
-from pathlib import Path
+#from pathlib import Path
 
 # Import kafka packages
 from kafka import KafkaConsumer
@@ -6,7 +6,8 @@ from kafka.errors import KafkaError
 
 # Import Spark packages
 from pyspark import SparkContext
-from pyspark import SparkSession
+from pyspark.sql import SparkSession
+from pyspark.sql import Row
 from pyspark.streaming import StreamingContext
 
 try:
@@ -14,131 +15,85 @@ try:
 except ImportError:
     import simplejson as json
 
-# Create a local StreamingContext with two working thread and batch interval of 10 minutes
-sc = SparkContext(appName="TweetMachine")
+def VerifyNotDelete(tweet):
+    if 'delete' not in tweet:
+       return tweet
 
-spark = SparkSession.builder.appName("TweetMachineThing").getOrCreate()
+def VerifyHashtag(word):
+    if word.startswith("#"):
+        return word
 
-keyWordsRdd = sc.emptyRDD()
-hashtagsRdd = sc.emptyRDD()
-screenNameRdd = sc.emptyRDD()
-trumpWordsRdd = sc.emptyRDD()
+def VerifyNotStopWord(word):
+    if word not in ['a','about','above','after','again','against','all','am','an','and','any','are','as','at','be','because','been','before','being','below','between','both','but','by','cannot','could','did','do','does','doing','down','during','each','few','for','from','further','had','has','have','having','he','her','here','hers','herself','him','himself','his','how','i','if','in','into','is','it','its','itself','me','more','most','my','myself','no','nor','not','of','off','on','once','only','or','other','ought','our','ours','ourselves','out','over','own','same','she','should','so','some','such','than','that','the','their','theirs','them','themselves','then','there','these','they','this','those','through','to','too','under','until','up','very','was','we','were','what','when','where','which','while','who','whom','why','with','would','you','your','yours','yourself','yourselves']
+        return word
 
-proccessTask1And2 = False
-batchCounter = 0
-batchCounter2 = 0
-batchCounter3 = 0
+def VerifyTrumpWord(word):
+    if word.upper() in ['TRUMP', 'MAGA', 'DICTATOR', 'IMPEACH', 'SWAMP', 'DRAIN', 'CHANGE']:
+        return word.upper()
 
-ssc = StreamingContext(sc, 600)
+def PrepareServerForScreenNames(trash):
+    requests.post("http://selias.co.in/BigData/PrepareScreenNames", data={"val":True})
 
-batchCounter +=  1
-batchCounter2 +=  1
-batchCounter3 +=  1
+def PrepareServerForKeywords(trash):
+    requests.post("http://selias.co.in/BigData/PrepareKeyWords", data={"val":True})
 
-# Create a DStream that will connect to hostname:port, like localhost:9092
-tweetStrings = ssc.socketTextStream("localhost", 9092)
-open("tempFile1.txt", "w+").close()
-open("tempFile2.txt", "w+").close()
-open("tempFile3.txt", "w+").close()
-open("tempFile4.txt", "w+").close()
-for tweet in tweetStrings:
-    tweetJson = json.loads(tweet)
-    if 'delete' not in tweetJson:
-        # Get Screennames
-        tempString = str("%s,%s" % (tweetJson["created_at"], tweetJson["user"]["screen_name"]))
-        tempFile = open("tempFile1.txt", "a+")
-        tempFile.write("%s\n" % tempString)
-        tempFile.close()
+def PrepareServerForHashtags(trash):
+    requests.post("http://selias.co.in/BigData/PrepareHashtags", data={"val":True})
 
-        #Get words
-        words = tweetJson.replace(",", "").replace(".", "").replace("!", "").replace("?", "").split()
-        for word in words:
-            tempString = str("%s,%s" % (tweetJson["created_at"], word))
-            tempFile = open("tempFile2.txt", "a+")
-            tempFile.write("%s\n" % tempString)
-            tempFile.close()
+def PrepareServerForTrumpWords(trash):
+    requests.post("http://selias.co.in/BigData/PrepareTrumpWords", data={"val":True})
 
-            #Get Hashtags
-            if word.startswith("#"):
-                tempString = str("%s,%s" % (tweetJson["created_at"], word))
-                tempFile = open("tempFile3.txt", "a+")
-                tempFile.write("%s\n" % tempString)
-                tempFile.close()
+def SendScreenName(jsonData):   
+    requests.post("http://selias.co.in/BigData/ScreenName", data={"screen_name":jsonData[0],"count":jsonData[1]})
 
-            #Get Trump words
-            if word.lower() == "trump" or word.lower() == "maga" or word.lower() == "dictator" or word.lower() == "impeach" or word.lower() == "drain" or word.lower() == "swamp":
-                tempString = str("%s,%s" % (tweetJson["created_at"], word))
-                tempFile = open("tempFile4.txt", "a+")
-                tempFile.write("%s\n" % tempString)
-                tempFile.close()
+def SendKeyword(jsonData):   
+    requests.post("http://selias.co.in/BigData/Keyword", data={"word":jsonData[0],"count":jsonData[1]})
 
-tempRdd = sc.textFile("tempFile.txt").map(lambda line: line.split('\n'))
-mainRdd.union(tempRdd)
+def SendHashtag(jsonData):   
+    requests.post("http://selias.co.in/BigData/Hashtag", data={"hashtag":jsonData[0],"count":jsonData[1]})
 
-if(batchCounter == 6):
-    proccessTask1And2 = True
+def SendTrumpWord(jsonData):   
+    requests.post("http://selias.co.in/BigData/TrumpWord", data={"word":jsonData[0],"count":jsonData[1]})
 
-if proccessTask1And2:
-    if batchCounter == 1:
-        #Erase last 10 minutes of data for task 1 and 2
-    
-    # do task 1 and 2
-    keywordDataFrame = keyWordsRdd.toDF(["date", "word"])
-    hashtagsDataFrame = hashtagsRdd.toDF(["date", "word"])
+if __name__ == "__main__":
+    sc = SparkContext(appName="TweetMachine")
 
-    keywordDataFrame.createOrReplaceTempView("keywords")
-    hashtagsDataFrame.createOrReplaceTempView("hashtags")
+    # Create a local StreamingContext with two working thread and batch interval of 10 minutes
+    ssc = StreamingContext(sc, 600)
 
-    keywordResult = spark.sql("SELECT TOP 10 word, count(word) as occurence FROM keywords GROUP BY word ORDER BY occurence")
-    hashtagsResult = spark.sql("SELECT TOP 10 word, count(word) as occurence FROM hashtags GROUP BY word ORDER BY occurence")
+    sc.setCheckpointDir("/tmp/checkpoints/")
 
-    resultString = ""
-    for hashtag in hashtagsResult.collect():
-        resultString += hashtag[1] + ","
+    hack = sc.parallelize(["marroneo hardcore"])
 
-    resultFile = open("result1.txt", "a+")
-    resultFile.write("%s\n" % resultString[:-1])
+    consumer = KafkaUtils.createStream(ssc,"localhost:2181","twitter-streaming",{'tweets':1})
 
-    resultString = ""
-    for keyword in keywordResult.collect():
-        resultString += keyword[1] + ","
+    data = consumer.map(lambda tweets: json.loads(tweets[1])) 
 
-    resultFile = open("result2.txt", "a+")
-    resultFile.write("%s\n" % resultString[:-1])
+    wordsRdd = data.filter(VerifyNotDelete).flatMap(lambda tweet: tweet['text'].replace(",", "").replace(".", "").replace("!", "").replace("?", "").split())
 
-    if(batchCounter % 6 == 0):
-        if batchCounter2 == 72:
-            #Erase last hour of data for task 3
-            batchCounter2 = 0
+    # Keywords
+    keywordsCounted = wordsRdd.filter(VerifyNotStopWord).countByValueAndWindow(3600,600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
+    topKeywords = keywordsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
+    hack.foreachRDD(PrepareKeyWords)
+    topKeywords.foreachRDD(lambda row: row.foreach(SendKeyword))
 
-        if batchCounter3 == 144:
-            #Erase last hour of data for task 4
-            batchCounter3 = 0
+    # Hashtags   
+    hashtagsCounted = wordsRdd.filter(VerifyHashtag).countByValueAndWindow(3600,600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
+    topHashtags = hashtagsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
+    hack.foreachRDD(PrepareHashtags)
+    topHashtags.foreachRDD(lambda row: row.foreach(SendHashtag))
 
-        batchCounter = 0
-        # do task 3 and 4
-        screennameDataFrame = screenNameRdd.toDF(["date", "screen_name"])
-        trumpWordsDataFrame = trumpWordsRdd.toDF(["date", "word"])
+    # Screen Names
+    screenNameRdd = data.filter(VerifyNotDelete).map(lambda tweet: tweet['user']['screen_name']) 
+    screenNamesCounted = screenNameRdd.countByValueAndWindow(43200, 3600).transform(lambda rdd: rdd.sortBy(lambda row: row[1], ascending=False))
+    topScreenNames = screenNamesCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
+    hack.foreachRDD(PrepareScreenNames)
+    topScreenNames.foreachRDD(lambda row: row.foreach(SendScreenName))
 
-        screennameDataFrame.createOrReplaceTempView("screen_names")
-        trumpWordsDataFrame.createOrReplaceTempView("trumps")
+    # Trump Words
+    trumpWordsCounted = wordsRdd.filter(VerifyTrumpWord).countByValueAndWindow(86400,3600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
+    hack.foreachRDD(PrepareScreenNames)
+    trumpWordsCounted.foreachRDD(lambda row: row.foreach(SendTrumpWord))
 
-        screennameResult = spark.sql("SELECT TOP 10 screen_name, count(screen_name) as occurence FROM screen_names GROUP BY screen_name ORDER BY occurence")
-        trumpWordsResult = spark.sql("SELECT TOP 10 word, count(word) as occurence FROM trumps GROUP BY word ORDER BY occurence")
-
-        resultString = ""
-        for screen_name in screennameResult.collect():
-            resultString += screen_name[1] + ","
-
-        resultFile = open("result3.txt", "a+")
-        resultFile.write("%s\n" % resultString[:-1])
-
-        resultString = ""
-        for trumpWord in trumpWordsResult.collect():
-            resultString += trumpWord[1] + ","
-
-        resultFile = open("result4.txt", "a+")
-        resultFile.write("%s\n" % resultString[:-1])
-
-
-ssc.start()             # Start the computation
+    ssc.start()             # Start the computation
+    ssc.awaitTermination()
