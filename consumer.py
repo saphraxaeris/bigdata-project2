@@ -56,13 +56,13 @@ def PrepareServerForTrumpWords(trash):
     requests.post("http://selias.co.in/BigData/PrepareTrumpWords", data={"val":True})
 
 def SendScreenName(jsonData):   
-    requests.post("http://selias.co.in/BigData/ScreenName", data="{'screen_name':'%s','count':%s}" % (jsonData[0], jsonData[1]), headers={'content-type': 'application/json'})
+    requests.post("http://selias.co.in/BigData/ScreenName", data="{'screen_name':'%s','count':%s}" % (jsonData[0].encode('utf8'), jsonData[1]), headers={'content-type': 'application/json'})
 
 def SendKeyword(jsonData):   
-    requests.post("http://selias.co.in/BigData/Keyword", data="{'word':'%s','count':%s}" % (jsonData[0], jsonData[1]), headers={'content-type': 'application/json'})
+    requests.post("http://selias.co.in/BigData/Keyword", data="{'word':'%s','count':%s}" % (jsonData[0].encode('utf8'), jsonData[1]), headers={'content-type': 'application/json'})
 
 def SendHashtag(jsonData):   
-    requests.post("http://selias.co.in/BigData/Hashtag", data="{'hashtag':'%s','count':%s}" % (jsonData[0], jsonData[1]), headers={'content-type': 'application/json'})
+    requests.post("http://selias.co.in/BigData/Hashtag", data="{'hashtag':'%s','count':%s}" % (jsonData[0].encode('utf8'), jsonData[1]), headers={'content-type': 'application/json'})
 
 def SendTrumpWord(jsonData):   
     requests.post("http://selias.co.in/BigData/TrumpWord", data="{'word':'%s','count':%s}" % (jsonData[0], jsonData[1]), headers={'content-type': 'application/json'})
