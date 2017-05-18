@@ -7,7 +7,6 @@ from pyspark.streaming import StreamingContext
 from pyspark.streaming.kafka import KafkaUtils
 import requests
 import json
-import urllib2
 
 
 try:
@@ -45,11 +44,13 @@ def PrepareServerForTrumpWords(trash):
 
 def SendScreenName(jsonData):  
     jsonString = "{screen_name:'%s',count:%s}" % (jsonData[0],jsonData[1])
-    requests.get("http://selias.co.in/BigData/ScreenName?json=%s" % (jsonString))
+    url = "http://selias.co.in/BigData/ScreenName?json=%s" % (jsonString)
+    requests.get(url)
 
 def SendKeyword(jsonData):   
     jsonString = "{word:'%s',count:%s}" % (jsonData[0],jsonData[1])
-    requests.get("http://selias.co.in/BigData/Keyword?json=%s" % (jsonString))
+    url = "http://selias.co.in/BigData/Keyword?json=%s" % (jsonString)
+    requests.get(url)
 
 def SendHashtag(jsonData):   
     jsonString = "{hashtag:'%s',count:%s}" % (jsonData[0],jsonData[1])
@@ -57,13 +58,14 @@ def SendHashtag(jsonData):
 
 def SendTrumpWord(jsonData):   
     jsonString = "{word:'%s',count:%s}" % (jsonData[0],jsonData[1])
-    requests.get("http://selias.co.in/BigData/TrumpWord?json=%s" % (jsonString))
+    url = "http://selias.co.in/BigData/TrumpWord?json=%s" % (jsonString)
+    requests.get(url)
 
 if __name__ == "__main__":
     sc = SparkContext(appName="TweetMachine")
 
     # Create a local StreamingContext with two working thread and batch interval of 10 minutes
-    ssc = StreamingContext(sc, 600)
+    ssc = StreamingContext(sc, 30)
 
     sc.setCheckpointDir("/tmp/checkpoints/")
 
