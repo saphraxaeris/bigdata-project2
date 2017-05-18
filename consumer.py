@@ -86,7 +86,7 @@ if __name__ == "__main__":
     wordsRdd = data.filter(VerifyNotDelete).flatMap(lambda tweet: tweet['text'].replace(",", "").replace(".", "").replace("!", "").replace("?", "").replace("-", "").replace("\t", " ").replace("\n", " ").split())
 
     # Keywords
-    keywordsCounted = wordsRdd.filter(VerifyNotStopWord).countByValueAndWindow(3600,30).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
+    keywordsCounted = wordsRdd.filter(VerifyNotStopWord).filter(VerifyNotUnicode).countByValueAndWindow(3600,30).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     topKeywords = keywordsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
     hack = topKeywords.countByValueAndWindow(3600,30).transform(lambda rdd:sc.parallelize(rdd.take(0)))
     hack.foreachRDD(PrepareServerForKeywords)
