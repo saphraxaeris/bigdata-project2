@@ -82,7 +82,7 @@ if __name__ == "__main__":
     keywordsCounted = wordsRdd.filter(VerifyNotStopWord).countByValueAndWindow(3600,30).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     topKeywords = keywordsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
     hack.foreach(PrepareServerForKeywords)
-    hack.pprint()
+    hack.collect()
     topKeywords.foreachRDD(lambda row: row.foreach(SendKeyword))
     topKeywords.pprint()
 
@@ -90,7 +90,7 @@ if __name__ == "__main__":
     hashtagsCounted = wordsRdd.filter(VerifyHashtag).countByValueAndWindow(3600,600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     topHashtags = hashtagsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
     hack.foreach(PrepareServerForHashtags)
-    hack.pprint()
+    hack.collect()
     topHashtags.foreachRDD(lambda row: row.foreach(SendHashtag))
     topHashtags.pprint()
 
@@ -99,14 +99,14 @@ if __name__ == "__main__":
     screenNamesCounted = screenNameRdd.countByValueAndWindow(43200, 3600).transform(lambda rdd: rdd.sortBy(lambda row: row[1], ascending=False))
     topScreenNames = screenNamesCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
     hack.foreach(PrepareServerForScreenNames)
-    hack.pprint()
+    hack.collect()
     topScreenNames.foreachRDD(lambda row: row.foreach(SendScreenName))
     topScreenNames.pprint()
 
     # Trump Words
     trumpWordsCounted = wordsRdd.filter(VerifyTrumpWord).countByValueAndWindow(86400,3600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     hack.foreach(PrepareServerForTrumpWords)
-    hack.pprint()
+    hack.collect()
     trumpWordsCounted.foreachRDD(lambda row: row.foreach(SendTrumpWord))
     trumpWordsCounted.pprint()
     
