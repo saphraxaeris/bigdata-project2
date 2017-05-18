@@ -2,7 +2,7 @@ import requests
 
 #requests.post("http://selias.co.in/BigData/PrepareKeyWords", data={"val":True})
 
-requests.post("http://selias.co.in/BigData/Keyword", data="{'word':'test','count':1}", headers={'content-type': 'application/json'})
+requests.post("http://selias.co.in/BigData/Keyword", data="{'screen_name':'%s','count':%s}" % ("test", 1), headers={'content-type': 'application/json'})
 
 # jsonString = "{word:'%s',count:%s}" % ("test",1)
 # test = "http://selias.co.in/BigData/Keyword?json=%s" % (jsonString)

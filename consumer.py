@@ -27,9 +27,7 @@ def VerifyNotHashtag(word):
         return word
 
 def VerifyNotUnicode(word):
-    if isinstance(word, unicode):
-        return
-    else:
+    if not isinstance(word, unicode):
         return word
 
 
