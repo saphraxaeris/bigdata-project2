@@ -23,7 +23,7 @@ def VerifyHashtag(word):
         return word
 
 def VerifyNotStopWord(word):
-    if word not in ['a','about','above','after','again','against','all','am','an','and','any','are','as','at','be','because','been','before','being','below','between','both','but','by','cannot','could','did','do','does','doing','down','during','each','few','for','from','further','had','has','have','having','he','her','here','hers','herself','him','himself','his','how','i','if','in','into','is','it','its','itself','me','more','most','my','myself','no','nor','not','of','off','on','once','only','or','other','ought','our','ours','ourselves','out','over','own','same','she','should','so','some','such','than','that','the','their','theirs','them','themselves','then','there','these','they','this','those','through','to','too','under','until','up','very','was','we','were','what','when','where','which','while','who','whom','why','with','would','you','your','yours','yourself','yourselves']:
+    if word.len() > 3 and word not in ['a','about','above','after','again','against','all','am','an','and','any','are','as','at','be','because','been','before','being','below','between','both','but','by','cannot','could','did','do','does','doing','down','during','each','few','for','from','further','had','has','have','having','he','her','here','hers','herself','him','himself','his','how','i','if','in','into','is','it','its','itself','me','more','most','my','myself','no','nor','not','of','off','on','once','only','or','other','ought','our','ours','ourselves','out','over','own','same','she','should','so','some','such','than','that','the','their','theirs','them','themselves','then','there','these','they','this','those','through','to','too','under','until','up','very','was','we','were','what','when','where','which','while','who','whom','why','with','would','you','your','yours','yourself','yourselves']:
         return word
 
 def VerifyTrumpWord(word):
@@ -31,15 +31,19 @@ def VerifyTrumpWord(word):
         return word.upper()
 
 def PrepareServerForScreenNames(trash):
+    print "Marroneo Intenso - Screennames"
     requests.post("http://selias.co.in/BigData/PrepareScreenNames", data={"val":True})
 
 def PrepareServerForKeywords(trash):
+    print "Marroneo Intenso - Keywords"
     requests.post("http://selias.co.in/BigData/PrepareKeyWords", data={"val":True})
 
 def PrepareServerForHashtags(trash):
+    print "Marroneo Intenso - Hashtags"
     requests.post("http://selias.co.in/BigData/PrepareHashtags", data={"val":True})
 
 def PrepareServerForTrumpWords(trash):
+    print "Marroneo Intenso - Trump words"
     requests.post("http://selias.co.in/BigData/PrepareTrumpWords", data={"val":True})
 
 def SendScreenName(jsonData):  
@@ -69,7 +73,6 @@ if __name__ == "__main__":
     ssc = StreamingContext(sc, 30)
 
     sc.setCheckpointDir("/tmp/checkpoints/")
-
 
     consumer = KafkaUtils.createStream(ssc,"localhost:2181","twitter-streaming",{'tweets':1})
 
@@ -107,7 +110,7 @@ if __name__ == "__main__":
 
     # Trump Words
     trumpWordsCounted = wordsRdd.filter(VerifyTrumpWord).countByValueAndWindow(86400,3600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
-    hack = trumpWordsCounted.countByValueAndWindow(86400,30).transform(lambda rdd:sc.parallelize(rdd.take(0)))
+    hack = topScreenNames.countByValueAndWindow(43200,30).transform(lambda rdd:sc.parallelize(rdd.take(0)))
     hack.foreachRDD(PrepareServerForKeywords)
     hack.pprint()
     trumpWordsCounted.foreachRDD(lambda row: row.foreach(SendTrumpWord))
