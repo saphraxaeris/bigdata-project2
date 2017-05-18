@@ -54,23 +54,23 @@ def PrepareServerForTrumpWords(trash):
     requests.post("http://selias.co.in/BigData/PrepareTrumpWords", data={"val":True})
 
 def SendScreenName(jsonData):  
-    jsonString = "{screen_name:'%s',count:%s}" % (urllib.urlencode(jsonData[0]),jsonData[1])
+    jsonString = "{screen_name:'%s',count:%s}" % (urllib.quote_plus(jsonData[0]),jsonData[1])
     url = "http://selias.co.in/BigData/ScreenName?json=%s" % (jsonString)
     requests.get(url)
 
 def SendKeyword(jsonData):   
-    jsonString = "{word:'%s',count:%s}" % (urllib.urlencode(jsonData[0]),jsonData[1])
+    jsonString = "{word:'%s',count:%s}" % (urllib.quote_plus(jsonData[0]),jsonData[1])
     url = "http://selias.co.in/BigData/Keyword?json=%s" % (jsonString)
     print url
     requests.get(url)
 
 def SendHashtag(jsonData):   
-    jsonString = "{hashtag:'%s',count:%s}" % (urllib.urlencode(jsonData[0]).replace("#", ""),jsonData[1])
+    jsonString = "{hashtag:'%s',count:%s}" % (urllib.quote_plus(jsonData[0]).replace("#", ""),jsonData[1])
     url = "http://selias.co.in/BigData/Hashtag?json=%s" % (jsonString)
     requests.get(url)
 
 def SendTrumpWord(jsonData):   
-    jsonString = "{word:'%s',count:%s}" % (urllib.urlencode(jsonData[0]),jsonData[1])
+    jsonString = "{word:'%s',count:%s}" % (urllib.quote_plus(jsonData[0]),jsonData[1])
     url = "http://selias.co.in/BigData/TrumpWord?json=%s" % (jsonString)
     requests.get(url)
 
