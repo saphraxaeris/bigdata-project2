@@ -70,7 +70,6 @@ if __name__ == "__main__":
 
     sc.setCheckpointDir("/tmp/checkpoints/")
 
-    hack = sc.parallelize(["marroneo hardcore"])
 
     consumer = KafkaUtils.createStream(ssc,"localhost:2181","twitter-streaming",{'tweets':1})
 
@@ -81,16 +80,18 @@ if __name__ == "__main__":
     # Keywords
     keywordsCounted = wordsRdd.filter(VerifyNotStopWord).countByValueAndWindow(3600,30).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     topKeywords = keywordsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
-    hack.countByValueAndWindow(3600,30).transform(lambda rdd:sc.parallelize(rdd.take(1))).pprint()
+    hack = topKeywords.countByValueAndWindow(3600,30).transform(lambda rdd:sc.parallelize(rdd.take(0)))
     hack.foreachRDD(PrepareServerForKeywords)
+    hack.pprint()
     topKeywords.foreachRDD(lambda row: row.foreach(SendKeyword))
     topKeywords.pprint()
 
     # Hashtags   
     hashtagsCounted = wordsRdd.filter(VerifyHashtag).countByValueAndWindow(3600,30).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     topHashtags = hashtagsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
-    hack.countByValueAndWindow(3600,30).transform(lambda rdd:sc.parallelize(rdd.take(1))).pprint()
+    hack = topHashtags.countByValueAndWindow(3600,30).transform(lambda rdd:sc.parallelize(rdd.take(0)))
     hack.foreachRDD(PrepareServerForHashtags)
+    hack.pprint()
     topHashtags.foreachRDD(lambda row: row.foreach(SendHashtag))
     topHashtags.pprint()
 
@@ -98,15 +99,17 @@ if __name__ == "__main__":
     screenNameRdd = data.filter(VerifyNotDelete).map(lambda tweet: tweet['user']['screen_name']) 
     screenNamesCounted = screenNameRdd.countByValueAndWindow(43200, 30).transform(lambda rdd: rdd.sortBy(lambda row: row[1], ascending=False))
     topScreenNames = screenNamesCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
-    hack.countByValueAndWindow(3600,30).transform(lambda rdd:sc.parallelize(rdd.take(1))).pprint()
+    hack = topScreenNames.countByValueAndWindow(43200,30).transform(lambda rdd:sc.parallelize(rdd.take(0)))
     hack.foreachRDD(PrepareServerForScreenNames)
+    hack.pprint()
     topScreenNames.foreachRDD(lambda row: row.foreach(SendScreenName))
     topScreenNames.pprint()
 
     # Trump Words
     trumpWordsCounted = wordsRdd.filter(VerifyTrumpWord).countByValueAndWindow(86400,3600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
-    hack.countByValueAndWindow(3600,30).transform(lambda rdd:sc.parallelize(rdd.take(1))).pprint()
-    hack.foreachRDD(PrepareServerForTrumpWords)
+    hack = trumpWordsCounted.countByValueAndWindow(86400,30).transform(lambda rdd:sc.parallelize(rdd.take(0)))
+    hack.foreachRDD(PrepareServerForKeywords)
+    hack.pprint()
     trumpWordsCounted.foreachRDD(lambda row: row.foreach(SendTrumpWord))
     trumpWordsCounted.pprint()
     
