@@ -1,11 +1,8 @@
 import requests
 
 #requests.post("http://selias.co.in/BigData/PrepareKeyWords", data={"val":True})
-test = u'д'
-print isinstance(test.decode("utf-8"), str)
-print isinstance(test.decode("utf-8"), unicode)
 
-print len(test.decode("utf-8"))
+requests.post("http://selias.co.in/BigData/Keyword", data="{'word':'test','count':1}", headers={'content-type': 'application/json'})
 
 # jsonString = "{word:'%s',count:%s}" % ("test",1)
 # test = "http://selias.co.in/BigData/Keyword?json=%s" % (jsonString)

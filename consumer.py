@@ -22,6 +22,10 @@ def VerifyHashtag(word):
     if word.startswith("#"):
         return word
 
+def VerifyNotHashtag(word):
+    if not word.startswith("#"):
+        return word
+
 def VerifyNotUnicode(word):
     if isinstance(word, unicode):
         return
@@ -54,16 +58,16 @@ def PrepareServerForTrumpWords(trash):
     requests.post("http://selias.co.in/BigData/PrepareTrumpWords", data={"val":True})
 
 def SendScreenName(jsonData):   
-    requests.post("http://selias.co.in/BigData/ScreenName", data={"screen_name":jsonData[0],"count":jsonData[1]})
+    requests.post("http://selias.co.in/BigData/ScreenName", data="{'screen_name':'%s','count':%s}" % (jsonData[0], jsonData[1]), headers={'content-type': 'application/json'})
 
 def SendKeyword(jsonData):   
-    requests.post("http://selias.co.in/BigData/Keyword", data={"word":jsonData[0],"count":jsonData[1]})
+    requests.post("http://selias.co.in/BigData/Keyword", data="{'word':'%s','count':%s}" % (jsonData[0], jsonData[1]), headers={'content-type': 'application/json'})
 
 def SendHashtag(jsonData):   
-    requests.post("http://selias.co.in/BigData/Hashtag", data={"hashtag":jsonData[0],"count":jsonData[1]})
+    requests.post("http://selias.co.in/BigData/Hashtag", data="{'hashtag':'%s','count':%s}" % (jsonData[0], jsonData[1]), headers={'content-type': 'application/json'})
 
 def SendTrumpWord(jsonData):   
-    requests.post("http://selias.co.in/BigData/TrumpWord", data={"word":jsonData[0],"count":jsonData[1]})
+    requests.post("http://selias.co.in/BigData/TrumpWord", data="{'word':'%s','count':%s}" % (jsonData[0], jsonData[1]), headers={'content-type': 'application/json'})
 
 if __name__ == "__main__":
     sc = SparkContext(appName="TweetMachine")
@@ -80,7 +84,7 @@ if __name__ == "__main__":
     wordsRdd = data.filter(VerifyNotDelete).filter(VerifyNotUnicode).flatMap(lambda tweet: tweet['text'].replace(",", "").replace("_", "").replace("(", "").replace(")", "").replace("&", "").replace("^", "").replace("%", "").replace("@", "").replace(".", "").replace("!", "").replace("?", "").replace("-", "").replace("\t", " ").replace("\n", " ").split())
 
     # Keywords
-    keywordsCounted = wordsRdd.filter(VerifyNotStopWord).countByValueAndWindow(3600,30).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
+    keywordsCounted = wordsRdd.filter(VerifyNotStopWord).filter(VerifyNotHashtag).countByValueAndWindow(3600,30).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     topKeywords = keywordsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
     hack = topKeywords.countByValueAndWindow(3600,30).transform(lambda rdd:sc.parallelize(rdd.take(0)))
     hack.foreachRDD(PrepareServerForKeywords)
