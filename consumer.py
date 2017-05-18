@@ -44,20 +44,20 @@ def PrepareServerForTrumpWords(trash):
     requests.post("http://selias.co.in/BigData/PrepareTrumpWords", data={"val":True})
 
 def SendScreenName(jsonData):  
-    jsonString = "{screen_name:'%s',count:%s}" (jsonData[0],jsonData[1])
-    requests.get(str("http://selias.co.in/BigData/ScreenName?json=%s" % (jsonString)))
+    jsonString = "{screen_name:'%s',count:%s}" % (jsonData[0],jsonData[1])
+    requests.get("http://selias.co.in/BigData/ScreenName?json=%s" % (jsonString))
 
 def SendKeyword(jsonData):   
-    jsonString = "{word:'%s',count:%s}" (jsonData[0],jsonData[1])
-    requests.get(str("http://selias.co.in/BigData/Keyword?json=%s" % (jsonString)))
+    jsonString = "{word:'%s',count:%s}" % (jsonData[0],jsonData[1])
+    requests.get("http://selias.co.in/BigData/Keyword?json=%s" % (jsonString))
 
 def SendHashtag(jsonData):   
-    jsonString = "{hashtag:'%s',count:%s}" (jsonData[0],jsonData[1])
-    requests.get(str("http://selias.co.in/BigData/Hashtag?json=%s" % (jsonString)))
+    jsonString = "{hashtag:'%s',count:%s}" % (jsonData[0],jsonData[1])
+    requests.get("http://selias.co.in/BigData/Hashtag?json=%s" % (jsonString))
 
 def SendTrumpWord(jsonData):   
-    jsonString = "{word:'%s',count:%s}" (jsonData[0],jsonData[1])
-    requests.get(str("http://selias.co.in/BigData/TrumpWord?json=%s" % (jsonString)))
+    jsonString = "{word:'%s',count:%s}" % (jsonData[0],jsonData[1])
+    requests.get("http://selias.co.in/BigData/TrumpWord?json=%s" % (jsonString))
 
 if __name__ == "__main__":
     sc = SparkContext(appName="TweetMachine")
