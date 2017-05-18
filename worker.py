@@ -1,7 +1,8 @@
 import requests
 
-requests.post("http://selias.co.in/BigData/PrepareKeyWords", data={"val":True})
-
+#requests.post("http://selias.co.in/BigData/PrepareKeyWords", data={"val":True})
+test = "tegrerg"
+print test.size()
 # jsonString = "{word:'%s',count:%s}" % ("test",1)
 # test = "http://selias.co.in/BigData/Keyword?json=%s" % (jsonString)
 # print test

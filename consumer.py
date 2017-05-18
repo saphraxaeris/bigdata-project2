@@ -23,7 +23,7 @@ def VerifyHashtag(word):
         return word
 
 def VerifyNotStopWord(word):
-    if not isinstance(word, unicode) and word.len() > 3 and word not in ['a','about','above','after','again','against','all','am','an','and','any','are','as','at','be','because','been','before','being','below','between','both','but','by','cannot','could','did','do','does','doing','down','during','each','few','for','from','further','had','has','have','having','he','her','here','hers','herself','him','himself','his','how','i','if','in','into','is','it','its','itself','me','more','most','my','myself','no','nor','not','of','off','on','once','only','or','other','ought','our','ours','ourselves','out','over','own','same','she','should','so','some','such','than','that','the','their','theirs','them','themselves','then','there','these','they','this','those','through','to','too','under','until','up','very','was','we','were','what','when','where','which','while','who','whom','why','with','would','you','your','yours','yourself','yourselves']:
+    if not isinstance(word, unicode) and len(word) > 3 and word not in ['a','about','above','after','again','against','all','am','an','and','any','are','as','at','be','because','been','before','being','below','between','both','but','by','cannot','could','did','do','does','doing','down','during','each','few','for','from','further','had','has','have','having','he','her','here','hers','herself','him','himself','his','how','i','if','in','into','is','it','its','itself','me','more','most','my','myself','no','nor','not','of','off','on','once','only','or','other','ought','our','ours','ourselves','out','over','own','same','she','should','so','some','such','than','that','the','their','theirs','them','themselves','then','there','these','they','this','those','through','to','too','under','until','up','very','was','we','were','what','when','where','which','while','who','whom','why','with','would','you','your','yours','yourself','yourselves']:
         return word
 
 def VerifyTrumpWord(word):
@@ -59,6 +59,7 @@ def SendKeyword(jsonData):
 def SendHashtag(jsonData):   
     jsonString = "{hashtag:'%s',count:%s}" % (jsonData[0],jsonData[1])
     url = "http://selias.co.in/BigData/Hashtag?json=%s" % (jsonString)
+    print url
     requests.get(url)
 
 def SendTrumpWord(jsonData):   
