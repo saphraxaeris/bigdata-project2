@@ -54,7 +54,8 @@ def SendKeyword(jsonData):
 
 def SendHashtag(jsonData):   
     jsonString = "{hashtag:'%s',count:%s}" % (jsonData[0],jsonData[1])
-    requests.get("http://selias.co.in/BigData/Hashtag?json=%s" % (jsonString))
+    url = "http://selias.co.in/BigData/Hashtag?json=%s" % (jsonString)
+    requests.get(url)
 
 def SendTrumpWord(jsonData):   
     jsonString = "{word:'%s',count:%s}" % (jsonData[0],jsonData[1])
@@ -65,7 +66,7 @@ if __name__ == "__main__":
     sc = SparkContext(appName="TweetMachine")
 
     # Create a local StreamingContext with two working thread and batch interval of 10 minutes
-    ssc = StreamingContext(sc, 30)
+    ssc = StreamingContext(sc, 60)
 
     sc.setCheckpointDir("/tmp/checkpoints/")
 
@@ -75,12 +76,13 @@ if __name__ == "__main__":
 
     data = consumer.map(lambda tweets: json.loads(tweets[1])) 
 
-    wordsRdd = data.filter(VerifyNotDelete).flatMap(lambda tweet: tweet['text'].replace(",", "").replace(".", "").replace("!", "").replace("?", "").split())
+    wordsRdd = data.filter(VerifyNotDelete).flatMap(lambda tweet: tweet['text'].replace(",", "").replace(".", "").replace("!", "").replace("?", "").replace("-", "").replace("\t", " ").replace("\n", " ").split())
 
     # Keywords
-    keywordsCounted = wordsRdd.filter(VerifyNotStopWord).countByValueAndWindow(3600,600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
+    keywordsCounted = wordsRdd.filter(VerifyNotStopWord).countByValueAndWindow(3600,30).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     topKeywords = keywordsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
     hack.foreach(PrepareServerForKeywords)
+    hack.pprint()
     topKeywords.foreachRDD(lambda row: row.foreach(SendKeyword))
     topKeywords.pprint()
 
@@ -88,6 +90,7 @@ if __name__ == "__main__":
     hashtagsCounted = wordsRdd.filter(VerifyHashtag).countByValueAndWindow(3600,600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     topHashtags = hashtagsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
     hack.foreach(PrepareServerForHashtags)
+    hack.pprint()
     topHashtags.foreachRDD(lambda row: row.foreach(SendHashtag))
     topHashtags.pprint()
 
@@ -96,12 +99,14 @@ if __name__ == "__main__":
     screenNamesCounted = screenNameRdd.countByValueAndWindow(43200, 3600).transform(lambda rdd: rdd.sortBy(lambda row: row[1], ascending=False))
     topScreenNames = screenNamesCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
     hack.foreach(PrepareServerForScreenNames)
+    hack.pprint()
     topScreenNames.foreachRDD(lambda row: row.foreach(SendScreenName))
     topScreenNames.pprint()
 
     # Trump Words
     trumpWordsCounted = wordsRdd.filter(VerifyTrumpWord).countByValueAndWindow(86400,3600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     hack.foreach(PrepareServerForTrumpWords)
+    hack.pprint()
     trumpWordsCounted.foreachRDD(lambda row: row.foreach(SendTrumpWord))
     trumpWordsCounted.pprint()
     
