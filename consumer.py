@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     data = consumer.map(lambda tweets: json.loads(tweets[1])) 
 
-    wordsRdd = data.filter(VerifyNotDelete).filter(VerifyNotUnicode).flatMap(lambda tweet: tweet['text'].replace(",", "").replace("(", "").replace(")", "").replace("&", "").replace("^", "").replace("%", "").replace("@", "").replace(".", "").replace("!", "").replace("?", "").replace("-", "").replace("\t", " ").replace("\n", " ").split())
+    wordsRdd = data.filter(VerifyNotDelete).filter(VerifyNotUnicode).flatMap(lambda tweet: tweet['text'].replace(",", "").replace("_", "").replace("(", "").replace(")", "").replace("&", "").replace("^", "").replace("%", "").replace("@", "").replace(".", "").replace("!", "").replace("?", "").replace("-", "").replace("\t", " ").replace("\n", " ").split())
 
     # Keywords
     keywordsCounted = wordsRdd.filter(VerifyNotStopWord).countByValueAndWindow(3600,30).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
