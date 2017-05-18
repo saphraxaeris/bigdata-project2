@@ -82,12 +82,14 @@ if __name__ == "__main__":
     topKeywords = keywordsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
     hack.foreach(PrepareServerForKeywords)
     topKeywords.foreachRDD(lambda row: row.foreach(SendKeyword))
+    topKeywords.pprint()
 
     # Hashtags   
     hashtagsCounted = wordsRdd.filter(VerifyHashtag).countByValueAndWindow(3600,600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     topHashtags = hashtagsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
     hack.foreach(PrepareServerForHashtags)
     topHashtags.foreachRDD(lambda row: row.foreach(SendHashtag))
+    topHashtags.pprint()
 
     # Screen Names
     screenNameRdd = data.filter(VerifyNotDelete).map(lambda tweet: tweet['user']['screen_name']) 
@@ -95,11 +97,13 @@ if __name__ == "__main__":
     topScreenNames = screenNamesCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
     hack.foreach(PrepareServerForScreenNames)
     topScreenNames.foreachRDD(lambda row: row.foreach(SendScreenName))
+    topScreenNames.pprint()
 
     # Trump Words
     trumpWordsCounted = wordsRdd.filter(VerifyTrumpWord).countByValueAndWindow(86400,3600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     hack.foreach(PrepareServerForTrumpWords)
     trumpWordsCounted.foreachRDD(lambda row: row.foreach(SendTrumpWord))
-
+    trumpWordsCounted.pprint()
+    
     ssc.start()             # Start the computation
     ssc.awaitTermination()
