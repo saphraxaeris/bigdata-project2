@@ -66,7 +66,7 @@ if __name__ == "__main__":
     sc = SparkContext(appName="TweetMachine")
 
     # Create a local StreamingContext with two working thread and batch interval of 10 minutes
-    ssc = StreamingContext(sc, 60)
+    ssc = StreamingContext(sc, 30)
 
     sc.setCheckpointDir("/tmp/checkpoints/")
 
