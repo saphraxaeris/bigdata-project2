@@ -7,7 +7,7 @@ from pyspark.streaming import StreamingContext
 from pyspark.streaming.kafka import KafkaUtils
 import requests
 import json
-
+import urllib
 
 try:
     import json
@@ -54,23 +54,23 @@ def PrepareServerForTrumpWords(trash):
     requests.post("http://selias.co.in/BigData/PrepareTrumpWords", data={"val":True})
 
 def SendScreenName(jsonData):  
-    jsonString = "{screen_name:'%s',count:%s}" % (jsonData[0],jsonData[1])
+    jsonString = "{screen_name:'%s',count:%s}" % (urllib.urlencode(jsonData[0]),jsonData[1])
     url = "http://selias.co.in/BigData/ScreenName?json=%s" % (jsonString)
     requests.get(url)
 
 def SendKeyword(jsonData):   
-    jsonString = "{word:'%s',count:%s}" % (jsonData[0],jsonData[1])
+    jsonString = "{word:'%s',count:%s}" % (urllib.urlencode(jsonData[0]),jsonData[1])
     url = "http://selias.co.in/BigData/Keyword?json=%s" % (jsonString)
     print url
     requests.get(url)
 
 def SendHashtag(jsonData):   
-    jsonString = "{hashtag:'%s',count:%s}" % (jsonData[0].replace("#", ""),jsonData[1])
+    jsonString = "{hashtag:'%s',count:%s}" % (urllib.urlencode(jsonData[0]).replace("#", ""),jsonData[1])
     url = "http://selias.co.in/BigData/Hashtag?json=%s" % (jsonString)
     requests.get(url)
 
 def SendTrumpWord(jsonData):   
-    jsonString = "{word:'%s',count:%s}" % (jsonData[0],jsonData[1])
+    jsonString = "{word:'%s',count:%s}" % (urllib.urlencode(jsonData[0]),jsonData[1])
     url = "http://selias.co.in/BigData/TrumpWord?json=%s" % (jsonString)
     requests.get(url)
 
@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     data = consumer.map(lambda tweets: json.loads(tweets[1])) 
 
-    wordsRdd = data.filter(VerifyNotDelete).filter(VerifyNotUnicode).flatMap(lambda tweet: tweet['text'].replace(",", "").replace(".", "").replace("!", "").replace("?", "").replace("-", "").replace("\t", " ").replace("\n", " ").split())
+    wordsRdd = data.filter(VerifyNotDelete).filter(VerifyNotUnicode).flatMap(lambda tweet: tweet['text'].replace(",", "").replace("(", "").replace(")", "").replace("&", "").replace("^", "").replace("%", "").replace("@", "").replace(".", "").replace("!", "").replace("?", "").replace("-", "").replace("\t", " ").replace("\n", " ").split())
 
     # Keywords
     keywordsCounted = wordsRdd.filter(VerifyNotStopWord).countByValueAndWindow(3600,30).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
