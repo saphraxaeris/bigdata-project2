@@ -82,18 +82,18 @@ if __name__ == "__main__":
     wordsRdd = data.filter(VerifyNotDelete).filter(VerifyNotUnicode).flatMap(lambda tweet: tweet['text'].replace(",", "").replace("_", "").replace("(", "").replace(")", "").replace("&", "").replace("^", "").replace("%", "").replace("@", "").replace(".", "").replace("!", "").replace("?", "").replace("-", "").replace("\t", " ").replace("\n", " ").split())
 
     # Keywords
-    keywordsCounted = wordsRdd.filter(VerifyNotStopWord).filter(VerifyNotHashtag).countByValueAndWindow(3600,600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
+    keywordsCounted = wordsRdd.filter(VerifyNotStopWord).filter(VerifyNotHashtag).countByValueAndWindow(3600,300).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     topKeywords = keywordsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
-    hack = topKeywords.countByValueAndWindow(3600,600).transform(lambda rdd:sc.parallelize(rdd.take(0)))
+    hack = topKeywords.countByValueAndWindow(3600,300).transform(lambda rdd:sc.parallelize(rdd.take(0)))
     hack.foreachRDD(PrepareServerForKeywords)
     hack.pprint()
     topKeywords.foreachRDD(lambda row: row.foreach(SendKeyword))
     topKeywords.pprint()
 
     # Hashtags   
-    hashtagsCounted = wordsRdd.filter(VerifyHashtag).countByValueAndWindow(3600,600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
+    hashtagsCounted = wordsRdd.filter(VerifyHashtag).countByValueAndWindow(3600,300).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
     topHashtags = hashtagsCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
-    hack = topHashtags.countByValueAndWindow(3600,600).transform(lambda rdd:sc.parallelize(rdd.take(0)))
+    hack = topHashtags.countByValueAndWindow(3600,300).transform(lambda rdd:sc.parallelize(rdd.take(0)))
     hack.foreachRDD(PrepareServerForHashtags)
     hack.pprint()
     topHashtags.foreachRDD(lambda row: row.foreach(SendHashtag))
@@ -101,17 +101,17 @@ if __name__ == "__main__":
 
     # Screen Names
     screenNameRdd = data.filter(VerifyNotDelete).map(lambda tweet: tweet['user']['screen_name']) 
-    screenNamesCounted = screenNameRdd.countByValueAndWindow(43200, 3600).transform(lambda rdd: rdd.sortBy(lambda row: row[1], ascending=False))
+    screenNamesCounted = screenNameRdd.countByValueAndWindow(3600,300).transform(lambda rdd: rdd.sortBy(lambda row: row[1], ascending=False))
     topScreenNames = screenNamesCounted.transform(lambda rdd:sc.parallelize(rdd.take(10)))
-    hack = topScreenNames.countByValueAndWindow(43200,3600).transform(lambda rdd:sc.parallelize(rdd.take(0)))
+    hack = topScreenNames.countByValueAndWindow(3600,300).transform(lambda rdd:sc.parallelize(rdd.take(0)))
     hack.foreachRDD(PrepareServerForScreenNames)
     hack.pprint()
     topScreenNames.foreachRDD(lambda row: row.foreach(SendScreenName))
     topScreenNames.pprint()
 
     # Trump Words
-    trumpWordsCounted = wordsRdd.filter(VerifyTrumpWord).countByValueAndWindow(86400,3600).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
-    hack = topScreenNames.countByValueAndWindow(43200,3600).transform(lambda rdd:sc.parallelize(rdd.take(0)))
+    trumpWordsCounted = wordsRdd.filter(VerifyTrumpWord).countByValueAndWindow(3600,300).transform(lambda rdd: rdd.sortBy(lambda row: row[1],ascending=False))
+    hack = topScreenNames.countByValueAndWindow(3600,300).transform(lambda rdd:sc.parallelize(rdd.take(0)))
     hack.foreachRDD(PrepareServerForTrumpWords)
     hack.pprint()
     trumpWordsCounted.foreachRDD(lambda row: row.foreach(SendTrumpWord))
