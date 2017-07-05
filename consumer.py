@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
     sc.setCheckpointDir("/tmp/checkpoints/")
 
-    consumer = KafkaUtils.createStream(ssc,"localhost:2181","twitter-streaming",{'tweets':1})
+    consumer = KafkaUtils.createStream(ssc,"localhost:2181","twitter-streaming",{'tweets1':1})
 
     data = consumer.map(lambda tweets: json.loads(tweets[1])) 
 

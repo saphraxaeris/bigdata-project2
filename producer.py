@@ -46,7 +46,7 @@ def read_tweets(access_token, access_secret, consumer_key, consumer_secret):
         # Twitter Python Tool wraps the data returned by Twitter
         # as a TwitterDictResponse object.
         try:
-            producer.send('tweets', tweet)
+            producer.send('tweets1', tweet)
 
             # print screen_name and name
             # print("TWEET: ", tweet['user']['screen_name'])
